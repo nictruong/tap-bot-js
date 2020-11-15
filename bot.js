@@ -32,7 +32,9 @@ client.on('message', async (msg) => {
 	if (msg.content.includes('!team')) {
 		const channel = await getChannel(process.env.BASE_CHANNEL_ID);
 		const shuffledArray = shuffle(Array.from(channel.members.values()));
-		const users = shuffledArray.map((member) => member.user.username);
+		const users = shuffledArray
+			.map((member) => member.user.username)
+			.filter((user) => user !== 'TAP-Bot');
 
 		const nbOfTeams = parseInt(msg.content.split(' ')[1]) || 2;
 		const teams = chunkArray(users, nbOfTeams);
