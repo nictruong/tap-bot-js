@@ -1,13 +1,5 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const fs = require('fs');
-
-function getConfigs() {
-	const rawData = fs.readFileSync('./config/token.json');
-	return JSON.parse(rawData);
-}
-
-const { token, baseChannelId } = getConfigs();
 
 function shuffle(a) {
 	for (let i = a.length - 1; i > 0; i--) {
@@ -38,7 +30,7 @@ client.on('ready', () => {
 
 client.on('message', async (msg) => {
 	if (msg.content.includes('!team')) {
-		const channel = await getChannel(baseChannelId);
+		const channel = await getChannel(process.env.BASE_CHANNEL_ID);
 		const shuffledArray = shuffle(Array.from(channel.members.values()));
 		const users = shuffledArray.map((member) => member.user.username);
 
@@ -53,4 +45,4 @@ client.on('message', async (msg) => {
 	}
 });
 
-client.login(token);
+client.login(process.env.BOT_TOKEN);
