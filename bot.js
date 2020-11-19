@@ -21,7 +21,7 @@ function chunkArray(arr, n) {
 }
 
 const getChannel = async (id) => {
-	return await client.channels.fetch(id);
+	return await client.channels.fetch(id, false, true);
 };
 
 client.on('ready', () => {
