@@ -29,12 +29,12 @@ client.on('ready', () => {
 });
 
 client.on('message', async (msg) => {
-	if (msg.content.includes('!team')) {
+	if (msg.content.startsWith('!team')) {
 		const channel = await getChannel(process.env.BASE_CHANNEL_ID);
 		const shuffledArray = shuffle(Array.from(channel.members.values()));
 		const users = shuffledArray
 			.map((member) => member.user.username)
-			.filter((user) => user !== 'TAP-Bot');
+			.filter((user) => !user.bot);
 
 		const nbOfTeams = parseInt(msg.content.split(' ')[1]) || 2;
 		const teams = chunkArray(users, nbOfTeams);
@@ -44,6 +44,7 @@ client.on('message', async (msg) => {
 		}, '');
 
 		msg.channel.send(botMessage);
+	} else if (msg.content.starts('!unit')) {
 	}
 });
 
