@@ -44,7 +44,6 @@ client.on('message', async (msg) => {
 		}, '');
 
 		msg.channel.send(botMessage);
-	} else if (msg.content.starts('!unit')) {
 	}
 });
 
