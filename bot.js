@@ -46,8 +46,6 @@ client.on('message', async (msg) => {
 		if (botMessage && botMessage !== '') {
 			msg.channel.send(botMessage);
 		}
-	} else if (msg.author.id === '778699790837874689') {
-		msg.channel.send('fuck you, BetterBot');
 	}
 });
 
