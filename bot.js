@@ -66,6 +66,8 @@ client.on('message', async (msg) => {
 
 				const playerHistory = await resp.json();
 
+				console.log(playerHistory);
+
 				const history = playerHistory
 					.filter((match) => match.ranked)
 					.map((match) => match.players)
