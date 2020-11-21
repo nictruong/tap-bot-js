@@ -84,6 +84,7 @@ client.on('message', async (msg) => {
 
 				msg.channel.send(botMessage);
 			} catch (e) {
+				console.error(e);
 				msg.channel.send('Bad request :(');
 			}
 		}
