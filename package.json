@@ -17,6 +17,6 @@
 		"node-dev": "^6.2.0"
 	},
 	"engines": {
-		"node": "16.x"
+		"node": "14.x"
 	}
 }
