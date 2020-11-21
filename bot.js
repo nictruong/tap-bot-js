@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const { default: fetch } = require('node-fetch');
 const client = new Discord.Client();
 
 function shuffle(a) {
@@ -45,6 +46,46 @@ client.on('message', async (msg) => {
 
 		if (botMessage && botMessage !== '') {
 			msg.channel.send(botMessage);
+		}
+	} else if (msg.content.startsWith('!stats')) {
+		// 76561198042509321
+		const steamId = msg.content.split(' ')[1];
+
+		if (isNaN(steamId)) {
+			msg.channel.send('Invalid Steam ID :(');
+		} else {
+			try {
+				const resp = await fetch(
+					`https://aoe2.net/api/player/matches?game=aoe2de&steam_id=${steamId}&count=20`,
+					{
+						headers: {
+							'Content-type': 'application/json',
+						},
+					}
+				);
+
+				const playerHistory = await resp.json();
+
+				const history = playerHistory
+					.filter((match) => match.ranked)
+					.map((match) => match.players)
+					.flat()
+					.filter((player) => player.steam_id === steamId);
+
+				const playerName = history[0].name;
+
+				const botMessage = history.reduce((result, match) => {
+					return (
+						result +
+						'\n' +
+						`${match.won ? 'won ' : 'lost  '}:   ${match.rating}`
+					);
+				}, playerName);
+
+				msg.channel.send(botMessage);
+			} catch (e) {
+				msg.channel.send('Bad request :(');
+			}
 		}
 	}
 });
