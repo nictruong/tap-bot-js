@@ -10,12 +10,13 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"discord.js": "^12.4.1"
+		"discord.js": "^12.4.1",
+		"node-fetch": "^2.6.1"
 	},
 	"devDependencies": {
 		"node-dev": "^6.2.0"
 	},
 	"engines": {
-		"node": "10.x"
+		"node": "16.x"
 	}
 }
