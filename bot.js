@@ -80,9 +80,14 @@ client.on('message', async (msg) => {
 						'\n' +
 						`${match.won ? 'won ' : 'lost  '}:   ${match.rating}`
 					);
-				}, playerName);
+				}, '');
 
-				msg.channel.send(botMessage);
+				const embed = new Discord.MessageEmbed()
+					.setTitle(playerName)
+					.setColor('#fc03f4')
+					.setDescription(botMessage);
+
+				msg.channel.send(embed);
 			} catch (e) {
 				console.error(e);
 				msg.channel.send('Bad request :(');
